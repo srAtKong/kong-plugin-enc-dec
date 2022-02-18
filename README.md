@@ -5,27 +5,14 @@ Kong plugin - JWE Enc Dec
 
 This repository contains a very simple skeleton for Kong Custom Plugin for Encryption/Decryption
 
+The encryption/decryption module is not implemented and stubbed out
+
 This plugin is designed to work with the
 [`kong-pongo`](https://github.com/Kong/kong-pongo) 
 
 Please check out those repos `README` files for usage instructions.
 
 ## Parameters
-
-The plugin can be applied against a service or a route:
-
-```
-curl -i -X POST http://kong:8001/services/{service}/plugins \
-  --data "name=jwe-enc-dec" 
-```
-
-OR
-
-```
-curl -i -X POST http://kong:8001/routes/{route}/plugins \
-  --data "name=jwe-enc-dec" 
-```
-
 
 | form parameter         | default   | description                                                      |
 | ---                    | ---       | ---                                                              |
@@ -35,3 +22,12 @@ curl -i -X POST http://kong:8001/routes/{route}/plugins \
 | `config.response_auth_header`   | Authorization| Response header to lookup plaintext |
 | `config.downstream_auth_header`   | Authorization| Downstream header to populate JWE |
 
+## Usage
+1. Create a service with host "httpbin.org/anything"
+2. Create a route to the service
+3. Apply the plugin to the service/route
+4. Test
+
+Send a request to the route with some ciphertext for the Auth header. 
+
+Examine the response to view the upstream request and response where the Auth header is decrupted and encrypted
